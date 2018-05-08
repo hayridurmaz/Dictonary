@@ -50,6 +50,10 @@ const char *intern_soft(struct intern *pool, const char *string)
 {
     return trie_search(pool->trie, string);
 }
+int intern_softFreq(struct intern *pool, const char *string)
+{
+    return trie_searchFreq(pool->trie, string);
+}
 
 size_t intern_count(struct intern *pool)
 {
