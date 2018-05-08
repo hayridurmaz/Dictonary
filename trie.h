@@ -18,7 +18,7 @@
  * when entries are "removed" by associating a NULL pointer.
  *
  * @see http://en.wikipedia.org/wiki/Trie
- * @Author: Hayri Durmaz 
+ * @Author: Hayri Durmaz sa
  */
 
 #include <stddef.h>
