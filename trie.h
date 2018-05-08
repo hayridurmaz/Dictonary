@@ -81,3 +81,5 @@ size_t trie_count(trie *trie, const char *prefix);
  * @return the number of bytes of memory used by this trie
  */
 size_t trie_size(trie *trie);
+int trie_searchFreq(const trie *self, const char *key);
+

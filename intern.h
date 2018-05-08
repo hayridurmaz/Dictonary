@@ -52,3 +52,4 @@ intern_soft(struct intern *pool, const char *string);
  */
 size_t
 intern_count(struct intern *pool);
+int intern_softFreq(struct intern *pool, const char *string);
