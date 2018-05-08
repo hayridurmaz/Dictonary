@@ -30,7 +30,7 @@ static void *inserter(const char *key, void *data, void *arg)
     {
         *dup = malloc(strlen(key) + 1);
         if (*dup != NULL)
-            strcpy(*dup, key);
+            strcpy(*dup, key);//Comment
         return *dup;
     }
     else
