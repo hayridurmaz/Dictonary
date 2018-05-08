@@ -29,5 +29,5 @@ int main(int argc, char **argv)
     char search[100];
     scanf("%s", search);
 
-    printf("'%s' freq: %d\n", (char *)intern_soft(&pool, search), intern_softFreq(&pool, search));
+    printf("'%s' freq: %d\n", (char *)intern_soft(&pool, search), trie_searchFreq(pool.trie, search));
 }

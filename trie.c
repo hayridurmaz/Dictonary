@@ -179,11 +179,12 @@ trie_search(const trie *self, const char *key)
 
 int trie_searchFreq(const trie *self, const char *key)
 {
+    //Returns a frequency
     trie *child;
     struct trieptr *parent;
     size_t depth = binary_search((trie *)self, &child, &parent, key);
     // printf("sa ben:%s",(char *)child->data);
-    return key[depth] == '\0' ? child->freq : 1;
+    return key[depth] == '\0' ? child->freq : 0;
 }
 
 /* Insertion functions. */
