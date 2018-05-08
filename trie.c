@@ -5,12 +5,14 @@
 #include <errno.h>
 #include "trie.h"
 
-struct trieptr {
+struct trieptr
+{
     trie *trie;
     int c;
 };
 
-struct trie {
+struct trie
+{
     void *data;
     uint8_t nchildren, size;
     int freq;
@@ -19,12 +21,14 @@ struct trie {
 
 /* Mini stack library for non-recursive traversal. */
 
-struct stack_node {
+struct stack_node
+{
     trie *trie;
     uint8_t i;
 };
 
-struct stack {
+struct stack
+{
     struct stack_node *stack;
     size_t fill, size;
 };
@@ -50,7 +54,8 @@ stack_grow(struct stack *s)
 {
     size_t newsize = s->size * 2 * sizeof(struct stack_node);
     struct stack_node *resize = realloc(s->stack, newsize);
-    if (resize == NULL) {
+    if (resize == NULL)
+    {
         stack_free(s);
         return -1;
     }
@@ -97,20 +102,23 @@ trie_create(void)
     return root;
 }
 
-int
-trie_free(trie *trie)
+int trie_free(trie *trie)
 {
     struct stack stack, *s = &stack;
     if (stack_init(s) != 0)
         return errno;
     stack_push(s, trie); // first push always successful
-    while (s->fill > 0) {
+    while (s->fill > 0)
+    {
         struct stack_node *node = stack_peek(s);
-        if (node->i < node->trie->nchildren) {
+        if (node->i < node->trie->nchildren)
+        {
             if (stack_push(s, node->trie->children[node->i].trie) != 0)
                 return errno;
             node->i++;
-        } else {
+        }
+        else
+        {
             free(stack_pop(s));
         }
     }
@@ -127,23 +135,30 @@ binary_search(trie *self, trie **child,
     size_t i = 0;
     bool found = true;
     *ptr = NULL;
-    while (found && key[i] != '\0') {
+    while (found && key[i] != '\0')
+    {
         int first = 0;
         int last = self->nchildren - 1;
         int middle;
         found = false;
-        while (first <= last) {
+        while (first <= last)
+        {
             middle = (first + last) / 2;
             struct trieptr *p = &self->children[middle];
-            if (p->c < key[i]) {
+            if (p->c < key[i])
+            {
                 first = middle + 1;
-            } else if (p->c == key[i]) {
+            }
+            else if (p->c == key[i])
+            {
                 self = p->trie;
                 *ptr = p;
                 found = true;
                 i++;
                 break;
-            } else {
+            }
+            else
+            {
                 last = middle - 1;
             }
         }
@@ -157,17 +172,16 @@ trie_search(const trie *self, const char *key)
 {
     trie *child;
     struct trieptr *parent;
-    size_t depth = binary_search((trie *) self, &child, &parent, key);
+    size_t depth = binary_search((trie *)self, &child, &parent, key);
     // printf("sa ben:%s",(char *)child->nchildren);
     return key[depth] == '\0' ? child->data : NULL;
 }
 
-int
-trie_searchFreq(const trie *self, const char *key)
+int trie_searchFreq(const trie *self, const char *key)
 {
     trie *child;
     struct trieptr *parent;
-    size_t depth = binary_search((trie *) self, &child, &parent, key);
+    size_t depth = binary_search((trie *)self, &child, &parent, key);
     // printf("sa ben:%s",(char *)child->data);
     return key[depth] == '\0' ? child->freq : 0;
 }
@@ -175,7 +189,8 @@ trie_searchFreq(const trie *self, const char *key)
 /* Insertion functions. */
 
 static trie *
-grow(trie *self) {
+grow(trie *self)
+{
     int size = self->size * 2;
     if (size > 255)
         size = 255;
@@ -196,7 +211,8 @@ ptr_cmp(const void *a, const void *b)
 static trie *
 add(trie *self, int c, trie *child)
 {
-    if (self->size == self->nchildren) {
+    if (self->size == self->nchildren)
+    {
         self = grow(self);
         if (self == NULL)
             return NULL;
@@ -224,27 +240,29 @@ create(void)
 static void *
 identity(const char *key, void *data, void *arg)
 {
-    (void) key;
-    (void) data;
+    (void)key;
+    (void)data;
     return arg;
 }
 
-int
-trie_replace(trie *self, const char *key, trie_replacer f, void *arg)
+int trie_replace(trie *self, const char *key, trie_replacer f, void *arg)
 {
     trie *last;
     struct trieptr *parent;
     size_t depth = binary_search(self, &last, &parent, key);
-    while (key[depth] != '\0') {
+    while (key[depth] != '\0')
+    {
         trie *subtrie = create();
         if (subtrie == NULL)
             return errno;
         trie *added = add(last, key[depth], subtrie);
-        if (added == NULL) {
+        if (added == NULL)
+        {
             free(subtrie);
             return errno;
         }
-        if (parent != NULL) {
+        if (parent != NULL)
+        {
             parent->trie = added;
             parent = NULL;
         }
@@ -257,15 +275,15 @@ trie_replace(trie *self, const char *key, trie_replacer f, void *arg)
     return 0;
 }
 
-int
-trie_insert(trie *trie, const char *key, void *data)
+int trie_insert(trie *trie, const char *key, void *data)
 {
-     return trie_replace(trie, key, identity, data);
+    return trie_replace(trie, key, identity, data);
 }
 
 /* Mini buffer library. */
 
-struct buffer {
+struct buffer
+{
     char *buffer;
     size_t size, fill;
 };
@@ -292,7 +310,8 @@ static inline int
 buffer_grow(struct buffer *b)
 {
     char *resize = realloc(b->buffer, b->size * 2);
-    if (resize == NULL) {
+    if (resize == NULL)
+    {
         buffer_free(b);
         return -1;
     }
@@ -328,31 +347,40 @@ visit(trie *self, const char *prefix, trie_visitor visitor, void *arg)
     struct stack stack, *s = &stack;
     if (buffer_init(b, prefix) != 0)
         return -1;
-    if (stack_init(s) != 0) {
+    if (stack_init(s) != 0)
+    {
         buffer_free(b);
         return -1;
     }
     stack_push(s, self);
-    while (s->fill > 0) {
+    while (s->fill > 0)
+    {
         struct stack_node *node = stack_peek(s);
-        if (node->i == 0 && node->trie->data != NULL) {
-            if (visitor(b->buffer, node->trie->data, arg) != 0) {
+        if (node->i == 0 && node->trie->data != NULL)
+        {
+            if (visitor(b->buffer, node->trie->data, arg) != 0)
+            {
                 buffer_free(b);
                 stack_free(s);
                 return 1;
             }
         }
-        if (node->i < node->trie->nchildren) {
-            if (stack_push(s, node->trie->children[node->i].trie) != 0) {
+        if (node->i < node->trie->nchildren)
+        {
+            if (stack_push(s, node->trie->children[node->i].trie) != 0)
+            {
                 buffer_free(b);
                 return -1;
             }
-            if (buffer_push(b, node->trie->children[node->i].c) != 0) {
+            if (buffer_push(b, node->trie->children[node->i].c) != 0)
+            {
                 stack_free(s);
                 return -1;
             }
             node->i++;
-        } else {
+        }
+        else
+        {
             buffer_pop(b);
             stack_pop(s);
         }
@@ -362,8 +390,7 @@ visit(trie *self, const char *prefix, trie_visitor visitor, void *arg)
     return 0;
 }
 
-int
-trie_visit(trie *self, const char *prefix, trie_visitor visitor, void *arg)
+int trie_visit(trie *self, const char *prefix, trie_visitor visitor, void *arg)
 {
     trie *start = self;
     struct trieptr *ptr;
@@ -379,8 +406,8 @@ trie_visit(trie *self, const char *prefix, trie_visitor visitor, void *arg)
 static int
 visitor_counter(const char *key, void *data, void *arg)
 {
-    (void) key;
-    (void) data;
+    (void)key;
+    (void)data;
     size_t *count = arg;
     count[0]++;
     return 0;
@@ -402,13 +429,17 @@ trie_size(trie *trie)
         return 0;
     stack_push(s, trie);
     size_t size = 0;
-    while (s->fill > 0) {
+    while (s->fill > 0)
+    {
         struct stack_node *node = stack_peek(s);
-        if (node->i < node->trie->nchildren) {
+        if (node->i < node->trie->nchildren)
+        {
             if (stack_push(s, node->trie->children[node->i].trie) != 0)
                 return 0;
             node->i++;
-        } else {
+        }
+        else
+        {
             struct trie *t = stack_pop(s);
             size += sizeof(*t) + sizeof(*t->children) * t->size;
         }
