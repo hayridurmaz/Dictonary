@@ -26,3 +26,10 @@
 	<stdio.h>
 	"trie.h"
 
+1525875418 source:c:\users\hayri\documents\github\dictonary\seqexecution2.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"trie.h"
+	"intern.h"
+

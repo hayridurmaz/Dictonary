@@ -32,9 +32,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="intern.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="intern.h" />
+		<Unit filename="seqExecution2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="trie.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="trie.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
