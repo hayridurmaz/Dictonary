@@ -30,4 +30,6 @@ int main(int argc, char **argv)
     scanf("%s", search);
 
     printf("'%s' freq: %d\n", (char *)intern_soft(&pool, search), trie_searchFreq(pool.trie, search));
+
+
 }

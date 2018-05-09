@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <errno.h>
+#include <stdio.h>
 #include "trie.h"
 
 struct trieptr
@@ -379,6 +380,63 @@ visit(trie *self, const char *prefix, trie_visitor visitor, void *arg)
                 return -1;
             }
             node->i++;
+        }
+        else
+        {
+            buffer_pop(b);
+            stack_pop(s);
+        }
+    }
+    buffer_free(b);
+    stack_free(s);
+    return 0;
+}
+
+int
+visitWrite(trie *self, const char *prefix, trie_visitor visitor, void *arg)
+{
+    printf("geldi");
+    FILE *fptr = fopen("as", "a");
+    printf("geldikmi");
+    if(fptr==NULL){
+        printf("YAZILACAK DOSYA AÇILAMADI YA LA\n");
+    }
+    struct buffer buffer, *b = &buffer;
+    struct stack stack, *s = &stack;
+    if (buffer_init(b, prefix) != 0)
+        return -1;
+    if (stack_init(s) != 0)
+    {
+        buffer_free(b);
+        return -1;
+    }
+    stack_push(s, self);
+    while (s->fill > 0)
+    {
+        struct stack_node *node = stack_peek(s);
+        if (node->i == 0 && node->trie->data != NULL)
+        {
+            if (visitor(b->buffer, node->trie->data, arg) != 0)
+            {
+                buffer_free(b);
+                stack_free(s);
+                return 1;
+            }
+        }
+        if (node->i < node->trie->nchildren)
+        {
+            if (stack_push(s, node->trie->children[node->i].trie) != 0)
+            {
+                buffer_free(b);
+                return -1;
+            }
+            if (buffer_push(b, node->trie->children[node->i].c) != 0)
+            {
+                stack_free(s);
+                return -1;
+            }
+            node->i++;
+            fprintf(fptr, "%s:%d", node->trie->data, node->trie->freq);
         }
         else
         {
