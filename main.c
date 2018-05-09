@@ -31,5 +31,4 @@ int main(int argc, char **argv)
 
     printf("'%s' freq: %d\n", (char *)intern_soft(&pool, search), trie_searchFreq(pool.trie, search));
 
-
 }
