@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1525875418 source:c:\users\hayri\documents\github\dictonary\intern.c
+	<stdlib.h>
+	<string.h>
+	"trie.h"
+	"intern.h"
+
+1525875418 c:\users\hayri\documents\github\dictonary\trie.h
+	<stddef.h>
+
+1525875418 c:\users\hayri\documents\github\dictonary\intern.h
+
+1525875418 source:c:\users\hayri\documents\github\dictonary\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"trie.h"
+	"intern.h"
+
+1525875418 source:c:\users\hayri\documents\github\dictonary\trie.c
+	<stdlib.h>
+	<stdint.h>
+	<stdbool.h>
+	<string.h>
+	<errno.h>
+	<stdio.h>
+	"trie.h"
+
