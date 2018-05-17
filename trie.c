@@ -436,6 +436,7 @@ visitWrite(trie *self, const char *prefix, trie_visitor visitor, void *arg)
                 return -1;
             }
             node->i++;
+            printf("%s:%d", (char*)node->trie->data, node->trie->freq);
             fprintf(fptr, "%s:%d", (char*)node->trie->data, node->trie->freq);
         }
         else
