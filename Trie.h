@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
 
 #define ARRAY_SIZE(a) sizeof(a) / sizeof(a[0])
 
@@ -36,3 +37,4 @@ extern void insert(struct TrieNode *root, const char *key);
 extern bool search(struct TrieNode *root, const char *key);
 extern int searchCount(struct TrieNode *root, const char *key);
 extern void traverse(char *prefix, struct TrieNode *node);
+extern void traverseAndWrite(char *prefix, struct TrieNode *node, FILE *fPtr);

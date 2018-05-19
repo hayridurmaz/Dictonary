@@ -33,6 +33,9 @@ void insert(struct TrieNode *root, const char *key)
     for (level = 0; level < length; level++)
     {
         index = CHAR_TO_INDEX(key[level]);
+        if(index<' ' || index>' '+ALPHABET_SIZE){
+            continue;
+        }
         if (!pCrawl->children[index])
             pCrawl->children[index] = getNode();
 
@@ -99,9 +102,33 @@ void traverse(char *prefix, struct TrieNode *node)
         struct TrieNode *pChild = node->children[index];
         if (pChild)
         {
+            // printf("%d",pChild->count);
             prefix[strlen(prefix)] = next;
             prefix[strlen(prefix) + 1] = '\0';
             traverse(prefix, pChild);
+            prefix[strlen(prefix) - 1] = '\0';
+        }
+    }
+}
+
+void traverseAndWrite(char *prefix, struct TrieNode *node, FILE *fPtr)
+{
+
+    if (node->isEndOfWord)
+    {
+        // printf("%s --- %d\n", prefix, node->count);
+        fprintf(fPtr, "%s : %d\n", prefix, node->count);
+    }
+
+    for (char index = 0; index < ALPHABET_SIZE; ++index)
+    {
+        char next = ' ' + index;
+        struct TrieNode *pChild = node->children[index];
+        if (pChild)
+        {
+            prefix[strlen(prefix)] = next;
+            prefix[strlen(prefix) + 1] = '\0';
+            traverseAndWrite(prefix, pChild,fPtr);
             prefix[strlen(prefix) - 1] = '\0';
         }
     }
