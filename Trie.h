@@ -36,4 +36,5 @@ extern void insert(struct TrieNode *root, const char *key);
 // Returns true if key presents in trie, else false
 extern bool search(struct TrieNode *root, const char *key);
 extern int searchCount(struct TrieNode *root, const char *key);
+extern void traverse(char *prefix, struct TrieNode *node);
 

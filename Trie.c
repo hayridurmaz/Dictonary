@@ -86,3 +86,27 @@ int searchCount(struct TrieNode *root, const char *key)
     }
     return 0;
 }
+
+void traverse(char *prefix, struct TrieNode *node)
+{
+
+    if (node->isEndOfWord)
+        printf("%s --- %d\n", prefix,node->count);
+
+    for (char index = 0; index < ALPHABET_SIZE; ++index)
+    {
+        char next = ' ' + index;
+        struct TrieNode *pChild = node->children[index];
+        if (pChild)
+        {
+            // realloc(prefix, (strlen(prefix) + 1) * (sizeof(char)));
+            prefix[strlen(prefix)] = next;
+            prefix[strlen(prefix) + 1] = '\0';
+            // printf("before req: %d\n", sizeof(*prefix));
+            traverse(prefix, pChild);
+            prefix[strlen(prefix)-1] = '\0';
+            // printf("after req: %d\n", sizeof(*prefix));
+            // realloc(prefix, (strlen(prefix) - 1) * (sizeof(char)));
+        }
+    }
+}
