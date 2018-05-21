@@ -7,7 +7,7 @@ int main(int argc, char const *argv[])
     // Construct trie
     struct TrieNode *root = getNode();
 
-    FILE *readFile = fopen("./files/data1.txt", "r");
+    FILE *readFile = fopen("C:\\Users\\hayri\\Documents\\GitHub\\Dictonary\\files\\data1.txt", "r");
     FILE *writeFile = fopen("outputTask2.txt", "w+");
     char *str = (char *)malloc(1000);
     char line[1000];
@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 
     if (readFile == NULL)
     {
-        printf("readfile null");
+        printf("read file null");
     }
     if (writeFile == NULL)
     {
@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
             break;
         }
         strtok(line, "\n"); // Otherwise it reads \n toooo :(!
-        // printf("%s\n", line);
+        printf("%s\n", line);
         insert(root, line);
     }
 

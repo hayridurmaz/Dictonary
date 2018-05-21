@@ -5,8 +5,12 @@
 	"trie.h"
 	"intern.h"
 
-1525875418 c:\users\hayri\documents\github\dictonary\trie.h
-	<stddef.h>
+1526933288 c:\users\hayri\documents\github\dictonary\trie.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<time.h>
 
 1525875418 c:\users\hayri\documents\github\dictonary\intern.h
 
@@ -17,14 +21,8 @@
 	"trie.h"
 	"intern.h"
 
-1525875418 source:c:\users\hayri\documents\github\dictonary\trie.c
-	<stdlib.h>
-	<stdint.h>
-	<stdbool.h>
-	<string.h>
-	<errno.h>
-	<stdio.h>
-	"trie.h"
+1526933288 source:c:\users\hayri\documents\github\dictonary\trie.c
+	"Trie.h"
 
 1525875418 source:c:\users\hayri\documents\github\dictonary\seqexecution2.c
 	<stdio.h>
@@ -32,4 +30,8 @@
 	<string.h>
 	"trie.h"
 	"intern.h"
+
+1526933770 source:c:\users\hayri\documents\github\dictonary\task2.c
+	"Trie.h"
+	<unistd.h>
 
