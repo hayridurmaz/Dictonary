@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/hayri/Documents/GitHub/Dictonary/Trie.c
+Trie.h
+C:/Users/hayri/Documents/GitHub/Dictonary/Trie.h
+
+C:/Users/hayri/Documents/GitHub/Dictonary/Trie.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+stdbool.h
+-
+time.h
+-
+
+C:/Users/hayri/Documents/GitHub/Dictonary/task2.c
+Trie.h
+C:/Users/hayri/Documents/GitHub/Dictonary/Trie.h
+unistd.h
+-
+

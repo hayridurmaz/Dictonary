@@ -1,0 +1,3 @@
+C:/Users/hayri/Documents/GitHub/Dictonary/cmake-build-debug/CMakeFiles/Dictonary.dir
+C:/Users/hayri/Documents/GitHub/Dictonary/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/hayri/Documents/GitHub/Dictonary/cmake-build-debug/CMakeFiles/rebuild_cache.dir
