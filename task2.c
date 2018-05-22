@@ -7,7 +7,7 @@ int main(int argc, char const *argv[])
     // Construct trie
     struct TrieNode *root = getNode();
 
-    FILE *readFile = fopen("C:\\Users\\hayri\\Documents\\GitHub\\Dictonary\\files\\data1.txt", "r");
+    FILE *readFile = fopen("./files/data1.txt", "r");
     FILE *writeFile = fopen("outputTask2.txt", "w+");
     char *str = (char *)malloc(1000);
     char line[1000];
@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
             break;
         }
         strtok(line, "\n"); // Otherwise it reads \n toooo :(!
-        printf("%s\n", line);
+        // printf("%s\n", line);
         insert(root, line);
     }
 
@@ -43,5 +43,6 @@ int main(int argc, char const *argv[])
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     printf("Time spent: %f sec", time_spent);
     fprintf(writeFile, "%s : %f sec\n", "Time spent: ", time_spent);
+    fclose(writeFile);
     return 0;
 }
