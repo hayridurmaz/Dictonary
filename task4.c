@@ -18,7 +18,7 @@ void *threadedRead(void *file)
             break;
         }
         strtok(line, "\n"); // Otherwise it reads \n toooo :(!
-        printf("%s\n", line);
+        // printf("%s\n", line);
         // printf("%s --- threadID:%d");
         pthread_mutex_lock(&mutex);
         insert(root, line);
