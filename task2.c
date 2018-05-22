@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
     d = opendir("./files");
 
     FILE *readFile = NULL;
-    FILE *writeFile = fopen("outputTask2.txt", "w+");
+    FILE *writeFile = fopen("./outputs/outputTask2.txt", "w+");
     char *str = (char *)malloc(1000);
     char line[1000];
     memset(str, '\0', sizeof(char) * 1000); //Windows doesnt do that automotically!
