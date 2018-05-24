@@ -38,3 +38,7 @@ extern bool search(struct TrieNode *root, const char *key);
 extern int searchCount(struct TrieNode *root, const char *key);
 extern void traverse(char *prefix, struct TrieNode *node);
 extern void traverseAndWrite(char *prefix, struct TrieNode *node, FILE *fPtr);
+
+
+extern void insertCounted(struct TrieNode *root, const char *key, int c);
+extern void trieMerge(struct TrieNode *tries, struct TrieNode *root, char *prefix);

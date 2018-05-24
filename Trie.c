@@ -33,7 +33,8 @@ void insert(struct TrieNode *root, const char *key)
     for (level = 0; level < length; level++)
     {
         index = CHAR_TO_INDEX(key[level]);
-        if(index<' ' || index>' '+ALPHABET_SIZE){
+        if (index < ' ' || index > ' ' + ALPHABET_SIZE)
+        {
             continue;
         }
         if (!pCrawl->children[index])
@@ -45,6 +46,32 @@ void insert(struct TrieNode *root, const char *key)
     // mark last node as leaf
     pCrawl->isEndOfWord = true;
     pCrawl->count++;
+}
+
+void insertCounted(struct TrieNode *root, const char *key, int c)
+{
+    int level;
+    int length = strlen(key);
+    int index;
+
+    struct TrieNode *pCrawl = root;
+
+    for (level = 0; level < length; level++)
+    {
+        index = CHAR_TO_INDEX(key[level]);
+        if (index < ' ' || index > ' ' + ALPHABET_SIZE)
+        {
+            continue;
+        }
+        if (!pCrawl->children[index])
+            pCrawl->children[index] = getNode();
+
+        pCrawl = pCrawl->children[index];
+    }
+
+    // mark last node as leaf
+    pCrawl->isEndOfWord = true;
+    pCrawl->count += c;
 }
 
 // Returns true if key presents in trie, else false
@@ -128,7 +155,37 @@ void traverseAndWrite(char *prefix, struct TrieNode *node, FILE *fPtr)
         {
             prefix[strlen(prefix)] = next;
             prefix[strlen(prefix) + 1] = '\0';
-            traverseAndWrite(prefix, pChild,fPtr);
+            traverseAndWrite(prefix, pChild, fPtr);
+            prefix[strlen(prefix) - 1] = '\0';
+        }
+    }
+}
+
+void trieMerge(struct TrieNode *tries, struct TrieNode *root, char *prefix)
+{
+
+    if (root == NULL)
+    {
+        printf("sa nıll");
+    }
+    if (tries->isEndOfWord)
+    {
+        // printf("%s --- %d\n", prefix, node->count);
+        // fprintf(fPtr, "%s : %d\n", prefix, node->count);
+        // printf("%s :   %d \n", prefix, tries->count);
+        insertCounted(root,prefix,tries->count);
+        // insert(root, prefix);
+    }
+
+    for (char index = 0; index < ALPHABET_SIZE; ++index)
+    {
+        char next = ' ' + index;
+        struct TrieNode *pChild = tries->children[index];
+        if (pChild)
+        {
+            prefix[strlen(prefix)] = next;
+            prefix[strlen(prefix) + 1] = '\0';
+            trieMerge(pChild, root, prefix);
             prefix[strlen(prefix) - 1] = '\0';
         }
     }
