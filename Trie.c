@@ -166,7 +166,7 @@ void trieMerge(struct TrieNode *tries, struct TrieNode *root, char *prefix)
 
     if (root == NULL)
     {
-        printf("sa nıll");
+        printf("file is NULL");
     }
     if (tries->isEndOfWord)
     {
