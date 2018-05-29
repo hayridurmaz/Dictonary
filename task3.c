@@ -1,3 +1,4 @@
+
 #include "Trie.h"
 #include <unistd.h>
 #include <dirent.h>
@@ -46,11 +47,11 @@ int main(int argc, char const *argv[])
             printf("%s\n", filename);
             readFile = fopen(filename, "r");
             // printf("%s\n", filename);
-            int a = 40000;
+            int a = 400;
             while (a > 0)
             {
-                char arr[10][1000];
-                for (int i = 0; i < 10; i++)
+                char arr[1000][1000];
+                for (int i = 0; i < 1000; i++)
                 {
                     if (fgets(arr[i], 1000, readFile) == NULL)
                     {
@@ -60,7 +61,7 @@ int main(int argc, char const *argv[])
                 }
 
                 // printf("%s\n", line);
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 1000; i++)
                 {
                     // printf("%s\n",arr[i]);
                     insert(root, arr[i]);
