@@ -10,4 +10,4 @@ This is a Trie implementation which includes some different task files. Each tas
 It is enough to execute make command in implementation folder.  
 
 ## Usage:
-There are 6 executables in this project. You can execute either one by typing > "**./taskTASKNUMBER** <br/> Example: > **./task5**
+There are 6 executables in this project. You can execute either one by typing > **./taskTASKNUMBER** <br/> Example: > **./task5**
