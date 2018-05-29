@@ -3,7 +3,7 @@
 
 int main(int argc, char const *argv[])
 {
-    char keys[][100] = {"îïáìõáíö"};
+    char keys[][100] = {"sa","as","sa"};
 
     char output[][32] = {"Not present in trie", "Present in trie"};
 
@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
 
     char *str = (char *)malloc(1000);
     memset(str, '\0', sizeof(char) * 1000); //Windows doesnt do that automotically!
-    FILE *fPtr = fopen("sa","w+");
+    FILE *fPtr = fopen("./outputs/outputTask1.txt","w+");
     traverseAndWrite(str, root,fPtr);
 
     return 0;
